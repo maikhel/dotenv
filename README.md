@@ -5,7 +5,7 @@
 Based on http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/
 
 ```
-git clone http://github.com/dudarev/dotvim.git ~/.vim
+git clone http://github.com/maikhel/dotenv.git ~/.vim
 ln -s ~/.vim/.vimrc ~/.vimrc
 cd .vim
 git submodule init
