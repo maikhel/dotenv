@@ -8,6 +8,7 @@ Based on http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-
 git clone http://github.com/maikhel/dotenv.git ~/.vim
 ln -s ~/.vim/.vimrc ~/.vimrc
 cd .vim
+git remote set-url origin git@github.com:maikhel/dotenv.git
 git submodule init
 git submodule update
 ```
@@ -30,5 +31,5 @@ git commit -m "Install Fugitive.vim bundle as a submodule."
 ### To remove a submodule
 1. Delete the relevant section from the .gitmodules file.
 1. Delete the relevant section from .git/config.
-1. Run git rm --cached path_to_submodule (no trailing slash).
+1. Run git rm --cached path_to_submodule.
 1. Commit and delete the now untracked submodule files.
