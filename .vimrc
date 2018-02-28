@@ -25,6 +25,10 @@ endif
 " already has detected
 au BufRead,BufNewFile *.es6 set filetype=javascript
 
+" use Emmet only for html and css files
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
 " make indentation easier
 filetype indent on
 
