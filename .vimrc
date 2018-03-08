@@ -43,6 +43,21 @@ set shell=bash
 " Enable copy to clipboard
 set clipboard=unnamed
 
+" use only specified linters
+let g:ale_linters = {
+  \ 'javascript': ['eslint'],
+  \ 'ruby': ['rubocop']
+  \ }
+
+" Run ale linter only on file save
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+
+" for fixing files
+let b:ale_fixers = ['eslint', 'rubocop']
+nmap <C-F> <Plug>(ale_fix)
+nmap <C-N> <Plug>(ale_next)
+
 " Ignore some folders and files for CtrlP indexing
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$',
