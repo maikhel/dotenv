@@ -21,9 +21,40 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
 endif
 
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Ag<SPACE>
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" For looong files
+set synmaxcol=200
+
+syntax enable
+set background=dark
+let g:solarized_termcolors = 256
+let g:solarized_termtrans = 1
+let g:solarized_visibility = "high"
+let g:solarized_contrast = "normal"
+colorscheme solarized
+
 " Set the type for the file type but do NOT override if file type
 " already has detected
 au BufRead,BufNewFile *.es6 set filetype=javascript
+au BufRead,BufNewFile Dockerfile.* set filetype=Dockerfile
 
 " use Emmet only for html and css files
 let g:user_emmet_install_global = 0
@@ -54,15 +85,36 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 
 " for fixing files
-let b:ale_fixers = ['eslint', 'rubocop']
+let g:ale_fixers = {
+  \ 'javascript': ['eslint'],
+  \ 'ruby': ['rubocop']
+  \ }
 nmap <C-F> <Plug>(ale_fix)
 nmap <C-N> <Plug>(ale_next)
 
 " Ignore some folders and files for CtrlP indexing
+"
+" let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$',
-  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$|public$|tmp$|node_modules$',
+  \ 'file': '\v\.(exe|so|dat|DS_Store)$'
   \ }
+
+" open NerdTree automatically
+autocmd vimenter * NERDTree
+
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeAutoDeleteBuffer = 1
+
+" NerdTree shortcuts
+nnoremap <C-B><C-B> :NERDTreeToggle<CR>
+nnoremap <silent> <C-B><C-L> :NERDTreeFind<CR>
+
+" strip white spaces
+nnoremap <C-W><C-W> :StripWhitespace<CR>
 
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
@@ -82,7 +134,6 @@ nnoremap <Down> :echoe "Use j"<CR>
 " Make it obvious where 80 characters is
 " set textwidth=80
 set colorcolumn=+1
-colo pablo
 
 " Numbers
 set number
