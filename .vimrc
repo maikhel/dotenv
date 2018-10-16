@@ -102,8 +102,9 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dat|DS_Store)$'
   \ }
 
-" open NerdTree automatically
-autocmd vimenter * NERDTree
+" open NerdTree automatically if no file specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
