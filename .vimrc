@@ -79,16 +79,20 @@ set clipboard=unnamed
 " use only specified linters
 let g:ale_linters = {
   \ 'javascript': ['eslint'],
+  \ 'python': ['pylint'],
   \ 'ruby': ['rubocop']
   \ }
 
 " Run ale linter only on file save
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
+" use bundle exec rubocop for invoking rubocop
+let g:ale_ruby_rubocop_executable = 'bundle'
 
 " for fixing files
 let g:ale_fixers = {
   \ 'javascript': ['eslint'],
+  \ 'python': ['autopep8'],
   \ 'ruby': ['rubocop']
   \ }
 nmap <C-F> <Plug>(ale_fix)
