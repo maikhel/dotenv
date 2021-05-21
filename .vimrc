@@ -132,6 +132,11 @@ set nojoinspaces
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
+" create a new todo item
+nnoremap gt o  _<Space>
+" check off a todo item and time stamp it
+nnoremap gd ^rx: <Esc>:r! date +" [\%H:\%M]"<ENTER>kJA<Esc>$
+
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
