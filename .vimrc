@@ -57,6 +57,7 @@ colorscheme solarized
 " Set the type for the file type but do NOT override if file type
 " already has detected
 au BufRead,BufNewFile *.es6 set filetype=javascript
+au BufRead,BufNewFile *.ddl set filetype=sql
 au BufRead,BufNewFile Dockerfile.* set filetype=Dockerfile
 
 " use Emmet only for html and css files
