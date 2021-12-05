@@ -47,12 +47,16 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 set synmaxcol=200
 
 syntax enable
-set background=light
-let g:solarized_termcolors = 256
+" set background=light
+set background=dark
+" let g:solarized_termcolors = 256
 let g:solarized_termtrans = 1
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "normal"
 colorscheme solarized
+
+nnoremap to :set background=dark<CR>
+nnoremap tl :set background=light<CR>
 
 " Set the type for the file type but do NOT override if file type
 " already has detected
@@ -90,6 +94,10 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 " use bundle exec rubocop for invoking rubocop
 let g:ale_ruby_rubocop_executable = 'bundle'
+
+" change displayed icons
+" let g:ale_sign_error = '●'
+" let g:ale_sign_warning = '.'
 
 " for fixing files
 let g:ale_fixers = {
@@ -141,12 +149,15 @@ nnoremap <leader><leader> <c-^>
 nnoremap gt o  _<Space>
 " check off a todo item and time stamp it
 nnoremap gd ^rx: <Esc>:r! date +" [\%H:\%M]"<ENTER>kJA<Esc>$
+" insert current date
+nnoremap tt "=strftime("%d.%m.%Y")<CR>P
 
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
+
 
 " Make it obvious where 80 characters is
 " set textwidth=80
